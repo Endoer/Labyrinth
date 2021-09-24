@@ -1,14 +1,14 @@
 "use strict"
 // optimization 1.Check algorithm 2.Rewrite drawing
-const CELL_SIZE = 10;
+const CELL_SIZE = 5;
 const PADDING = 5;
 const FREE_CELL = "white";
 const WALL_CELL = "black";
 const DELAY_TIMEOUT = 0;
 const ANIMATION_ON = true;
 
-const COLUMNS = 81;
-const ROWS = 81;
+const COLUMNS = 151;
+const ROWS = 151;
 
 const canvas = document.getElementById("lab");
 const context = canvas.getContext("2d");
@@ -55,10 +55,11 @@ function drawPath(movementChain) {
     for (let i = 1; i < movementChain.length; i++) {
         let [dx1, dy1] = movementChain[i];
         field[dy1][dx1] = true;
+        drawPoint(dx1,dy1);
         let [dx2, dy2] = movementChain[i - 1];
         field[(dy2 + dy1) / 2][(dx2 + dx1) / 2] = true;
+        drawPoint(dx2,dy2)
     }
-    drawLabyrinth();
 }
 
 function delay(timeout) {
@@ -121,14 +122,16 @@ function setCanvas() {
 function drawLabyrinth() {
     for (let y = 0; y < ROWS; y++) {
         for (let x = 0; x < COLUMNS; x++) {
-            context.beginPath();
-            context.rect(PADDING + x * CELL_SIZE, PADDING + y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-            context.fillStyle = field[y][x] ? FREE_CELL : WALL_CELL;
-            context.fill();
+            drawPoint(x,y);
         }
     }
 }
-
+function drawPoint(x,y){
+    context.beginPath();
+    context.rect(PADDING + x * CELL_SIZE, PADDING + y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    context.fillStyle = field[y][x] ? FREE_CELL : WALL_CELL;
+    context.fill();
+}
 function findStartPoints() {
     let possiblePoints = [];
     for (let y = 0; y < ROWS; y += 2) {
