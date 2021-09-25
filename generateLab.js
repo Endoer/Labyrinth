@@ -1,14 +1,14 @@
 "use strict"
 // optimization 1.Check algorithm 2.Rewrite drawing
-const CELL_SIZE = 5;
+const CELL_SIZE = 10;
 const PADDING = 5;
 const FREE_CELL = "white";
 const WALL_CELL = "black";
+const PATH_CELL = "red";
 const DELAY_TIMEOUT = 0;
-const ANIMATION_ON = true;
 
-const COLUMNS = 151;
-const ROWS = 151;
+const COLUMNS =51;
+const ROWS = 51;
 
 const canvas = document.getElementById("lab");
 const context = canvas.getContext("2d");
@@ -16,7 +16,8 @@ const context = canvas.getContext("2d");
 const field = createField();
 setCanvas();
 drawLabyrinth();
-createLabyrinth()
+createLabyrinth();
+console.log("finished");
 
 async function createLabyrinth() {
     field[0][0] = true;
@@ -24,8 +25,9 @@ async function createLabyrinth() {
     while (possiblePoints = findStartPoints()) {
         createPath(possiblePoints);
         drawLabyrinth();
-        if (ANIMATION_ON) await delay(DELAY_TIMEOUT);
+        await delay(DELAY_TIMEOUT);
     }
+    pathFinder()
 }
 
 function createPath(possiblePoints) {
