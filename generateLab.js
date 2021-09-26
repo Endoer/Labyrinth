@@ -1,14 +1,14 @@
 "use strict"
 // optimization 1.Check algorithm 2.Rewrite drawing
-const CELL_SIZE = 10;
+const CELL_SIZE = 8;
 const PADDING = 5;
 const FREE_CELL = "white";
 const WALL_CELL = "black";
 const PATH_CELL = "red";
 const DELAY_TIMEOUT = 0;
 
-const COLUMNS =51;
-const ROWS = 51;
+const COLUMNS =81;
+const ROWS = 81;
 
 const canvas = document.getElementById("lab");
 const context = canvas.getContext("2d");
