@@ -7,27 +7,35 @@ const WALL_CELL = "black";
 const PATH_CELL = "red";
 const DELAY_TIMEOUT = 0;
 
-const COLUMNS =81;
-const ROWS = 81;
+const ANIMATION_ON=true;
+
+const COLUMNS =101;
+const ROWS = 101;
 
 const canvas = document.getElementById("lab");
 const context = canvas.getContext("2d");
 
-const field = createField();
-setCanvas();
-drawLabyrinth();
-createLabyrinth();
-console.log("finished");
+let field;
+
+function main() {
+    field = createField();
+    setCanvas();
+    drawLabyrinth();
+    createLabyrinth();
+    console.log("finished");
+}
 
 async function createLabyrinth() {
     field[0][0] = true;
     let possiblePoints;
     while (possiblePoints = findStartPoints()) {
         createPath(possiblePoints);
-        drawLabyrinth();
-        await delay(DELAY_TIMEOUT);
+        if (ANIMATION_ON) {
+            drawLabyrinth();
+            await delay(DELAY_TIMEOUT);
+        }
     }
-    pathFinder()
+    drawLabyrinth();
 }
 
 function createPath(possiblePoints) {
