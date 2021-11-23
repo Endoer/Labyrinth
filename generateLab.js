@@ -7,7 +7,7 @@ const WALL_CELL = "black";
 const PATH_CELL = "red";
 const DELAY_TIMEOUT = 0;
 
-const ANIMATION_ON=true;
+let ANIMATION_ON=false;
 
 const COLUMNS =101;
 const ROWS = 101;
@@ -153,4 +153,8 @@ function findStartPoints() {
     }
     if (possiblePoints.length) return possiblePoints;
     else return null;
+}
+function changeAnimationStatus(){
+    ANIMATION_ON=!ANIMATION_ON;
+    console.log(ANIMATION_ON);
 }
